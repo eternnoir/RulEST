@@ -1,6 +1,8 @@
 package org.enoir.rulest.controller;
 
+import org.enoir.rulest.model.ErrorMsg;
 import org.enoir.rulest.model.ExcuteRequest;
+import org.enoir.rulest.model.RulESTBaseModel;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,11 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class ExecutorController {
+
     @RequestMapping(value = "/execute",method = RequestMethod.POST)
-    public String execute(@RequestBody ExcuteRequest excuteRequest) {
+    public RulESTBaseModel execute(@RequestBody ExcuteRequest excuteRequest) {
         if(excuteRequest == null){
-            return "ERROR";
+            return new ErrorMsg("00","Parse json error");
         }
-        return excuteRequest.getPackageName();
+        return excuteRequest;
     }
 }

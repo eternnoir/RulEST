@@ -3,7 +3,7 @@ package org.enoir.rulest.model;
 /**
  * Created by frank on 2015/4/1.
  */
-public class ExcuteRequest {
+public class ExcuteRequest extends RulESTBaseModel{
     private String packageName;
 
     public String getPackageName() {
