@@ -16,9 +16,12 @@ version = '1.0'
 
 repositories {
     mavenCentral()
+    maven { url "https://repository.jboss.org/nexus/content/groups/public/" }
 }
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
+    compile group: 'org.drools', name: 'drools-core', version: '6.2.0.Final'
+    compile group: 'org.drools', name: 'drools-compiler', version: '6.2.0.Final'
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
