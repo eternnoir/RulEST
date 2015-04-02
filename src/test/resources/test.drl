@@ -1,0 +1,14 @@
+package drools
+
+
+rule "Hello World"
+    when
+    then
+        System.out.println( "Hello");
+end
+
+rule "GoodBye"
+    when
+    then
+        System.out.println( "bye");
+end
