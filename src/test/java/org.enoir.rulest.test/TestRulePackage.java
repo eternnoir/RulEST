@@ -1,4 +1,4 @@
-package org.enoir.rulest.sample;
+package org.enoir.rulest.test;
 
 import org.enoir.rulest.ruleengine.RulePackage;
 import org.enoir.rulest.ruleengine.RulePackageManager;
@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by frank on 2015/4/18.
  */
-public class SampleRulePackage extends RulePackage {
+public class TestRulePackage extends RulePackage {
     @Override
     public String getName() {
         return this.name;
