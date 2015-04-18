@@ -36,6 +36,6 @@ public class RulePackageManagerTest {
         RulePackageManager rpm =  RulePackageManager.getInstance();
         Assert.assertEquals(rpm.getRulePackages().size(),1);
         RulePackage firstRp = rpm.getRulePackages().get(0);
-        Assert.assertEquals(firstRp.getName(),"TestRP");
+        Assert.assertEquals(firstRp.getName(),"SampleRP");
     }
 }
