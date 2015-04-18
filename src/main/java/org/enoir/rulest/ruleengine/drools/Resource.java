@@ -64,4 +64,5 @@ public class Resource {
     public void setPathType(PathType pathType) {
         this.pathType = pathType;
     }
+
 }

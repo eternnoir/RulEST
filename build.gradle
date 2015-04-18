@@ -9,7 +9,6 @@ buildscript {
 
 apply plugin: 'java'
 apply plugin: 'idea'
-apply plugin: "jacoco"
 apply plugin: 'spring-boot'
 
 version = '1.0'
@@ -23,5 +22,6 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     compile group: 'org.drools', name: 'drools-core', version: '6.2.0.Final'
     compile group: 'org.drools', name: 'drools-compiler', version: '6.2.0.Final'
+    compile group: 'org.reflections', name: 'reflections', version:'0.9.9-RC1'
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }

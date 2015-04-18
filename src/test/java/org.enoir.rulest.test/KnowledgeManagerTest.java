@@ -31,6 +31,4 @@ public class KnowledgeManagerTest {
         Collection<KnowledgePackage> packages = km.getKnowledgePackages();
         assertEquals(packages.size(),1);
     }
-
-
 }

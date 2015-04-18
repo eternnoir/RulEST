@@ -1,6 +1,5 @@
 package org.enoir.rulest.ruleengine.drools;
 
-import org.kie.api.io.ResourceType;
 import org.kie.internal.KnowledgeBase;
 import org.kie.internal.KnowledgeBaseFactory;
 import org.kie.internal.builder.KnowledgeBuilder;
@@ -13,8 +12,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static org.enoir.rulest.ruleengine.drools.PathType.*;
-
 /**
  * Created by frank on 2015/4/2.
  */
@@ -26,6 +23,10 @@ public class KnowledgeManager {
     public KnowledgeManager(){
         this.kBuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
         this.resources = new ArrayList<Resource>();
+    }
+
+    public StatefulKnowledgeSession getSession(){
+        return this.ksession;
     }
 
     public void addResource(Resource r){
@@ -48,9 +49,6 @@ public class KnowledgeManager {
     }
 
     public void fireAll(){
-        KnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase();
-        kbase.addKnowledgePackages(this.kBuilder.getKnowledgePackages());
-        this.ksession = kbase.newStatefulKnowledgeSession();
         this.ksession.fireAllRules();
     }
 
@@ -59,7 +57,9 @@ public class KnowledgeManager {
     }
 
     public void initSession(){
-
+        KnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase();
+        kbase.addKnowledgePackages(this.kBuilder.getKnowledgePackages());
+        this.ksession = kbase.newStatefulKnowledgeSession();
     }
 
 }
