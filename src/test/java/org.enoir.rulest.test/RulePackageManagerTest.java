@@ -11,7 +11,7 @@ import org.junit.Test;
  * Created by frank on 2015/4/18.
  */
 public class RulePackageManagerTest {
-        @Before
+    @Before
     public void setUp() {
     }
 
@@ -21,21 +21,19 @@ public class RulePackageManagerTest {
 
     @Test
     public void testInit(){
-        RulePackageManager rpm = new RulePackageManager();
+        RulePackageManager rpm = RulePackageManager.getInstance();
     }
 
 
     @Test
     public void testDefaultPackageSize(){
-        RulePackageManager rpm = new RulePackageManager();
+        RulePackageManager rpm = RulePackageManager.getInstance();
         Assert.assertEquals(rpm.getRulePackages().size(),1);
     }
 
-
-
     @Test
     public void testDefaultPackageName(){
-        RulePackageManager rpm = new RulePackageManager();
+        RulePackageManager rpm =  RulePackageManager.getInstance();
         Assert.assertEquals(rpm.getRulePackages().size(),1);
         RulePackage firstRp = rpm.getRulePackages().get(0);
         Assert.assertEquals(firstRp.getName(),"TestRP");
