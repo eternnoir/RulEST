@@ -1,13 +1,9 @@
 package drools
-import org.enoir.rulest.model.Fact
-declare Message
-    message: String
-    status: int
-end
+import org.enoir.rulest.sample.SampleFact
 
 rule "Hello World"
     when
-        m : Message( status == 1, myMessage : message )
+        m : SampleFact( status == 1, myMessage : message )
     then
         System.out.println( myMessage );
         m.setMessage( "Goodbye world" );
@@ -17,7 +13,7 @@ end
 
 rule "GoodBye"
     when
-        Message( status == 0, myMessage : message )
+        SampleFact( status == 0, myMessage : message )
     then
         System.out.println( myMessage );
 end

@@ -7,8 +7,11 @@ import org.enoir.rulest.model.Fact;
 import org.enoir.rulest.ruleengine.Exception.ParseJsonException;
 import org.enoir.rulest.ruleengine.RulePackage;
 import org.enoir.rulest.ruleengine.RulePackageManager;
+import org.enoir.rulest.ruleengine.drools.PathType;
 import org.enoir.rulest.ruleengine.drools.Resource;
+import org.kie.api.io.ResourceType;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,7 +30,9 @@ public class SampleRulePackage extends RulePackage {
 
     @Override
     public List<Resource> getResources() {
-        return null;
+        List<Resource> resourceList = new ArrayList<Resource>();
+        resourceList.add( new Resource("sample.drl", PathType.CLASSPATH, ResourceType.DRL));
+        return resourceList;
     }
 
     @Override
