@@ -7,6 +7,9 @@ import org.enoir.rulest.model.Fact;
  * Created by frank on 2015/4/20.
  */
 public class SampleFact extends Fact {
+
+    @SerializedName("id")
+    private int id;
     @SerializedName("message")
     private String message;
     @SerializedName("status")
@@ -26,5 +29,13 @@ public class SampleFact extends Fact {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
