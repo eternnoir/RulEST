@@ -7,7 +7,6 @@ import org.apache.commons.io.IOUtils;
 import org.enoir.rulest.model.ErrorMsg;
 import org.enoir.rulest.model.ExcuteRequest;
 import org.enoir.rulest.model.Fact;
-import org.enoir.rulest.model.RulESTBaseModel;
 import org.enoir.rulest.ruleengine.Exception.ParseJsonException;
 import org.enoir.rulest.ruleengine.Exception.RulePackageNotFoundException;
 import org.enoir.rulest.ruleengine.RulePackageManager;
@@ -72,10 +71,10 @@ public class ExecutorController {
     /**
      * This method will convert request json to Execute Request. It will call rule package's parse method
      * to convert json Fact to fact object.
-     *
      * @param jsonString Json String from request.
      * @return An execute request.
      * @throws RulePackageNotFoundException
+     * @throws ParseJsonException
      */
     private ExcuteRequest convertJsonToExecuteRequest(String jsonString) throws RulePackageNotFoundException, ParseJsonException {
         JsonParser parser = new JsonParser();
