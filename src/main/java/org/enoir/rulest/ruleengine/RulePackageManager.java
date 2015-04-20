@@ -1,5 +1,6 @@
 package org.enoir.rulest.ruleengine;
 
+import org.enoir.rulest.ruleengine.Exception.RulePackageNotFoundException;
 import org.reflections.Reflections;
 
 import java.util.*;
@@ -38,6 +39,13 @@ public class RulePackageManager {
                 e.printStackTrace();
             }
         }
+    }
+
+    public RulePackage getRulePackage(String rulePackageName) throws RulePackageNotFoundException {
+        if(!this.rulePackageMap.containsKey(rulePackageName)){
+            throw new RulePackageNotFoundException(rulePackageName,"Rule Not Found");
+        }
+        return this.rulePackageMap.get(rulePackageName);
     }
 
     public List<RulePackage> getRulePackages(){

@@ -1,5 +1,6 @@
 package org.enoir.rulest.test;
 
+import org.enoir.rulest.ruleengine.Exception.RulePackageNotFoundException;
 import org.enoir.rulest.ruleengine.RulePackage;
 import org.enoir.rulest.ruleengine.RulePackageManager;
 import org.junit.After;
@@ -37,5 +38,18 @@ public class RulePackageManagerTest {
         Assert.assertEquals(rpm.getRulePackages().size(),1);
         RulePackage firstRp = rpm.getRulePackages().get(0);
         Assert.assertEquals(firstRp.getName(),"SampleRP");
+    }
+
+    @Test
+    public void testRulePackageNotFound(){
+        RulePackageManager rpm =  RulePackageManager.getInstance();
+        try {
+            rpm.getRulePackage("yoyoyoy");
+            Assert.fail();
+        }catch (RulePackageNotFoundException rpnfe){
+            rpnfe.printStackTrace();
+        }catch (Exception e){
+            Assert.fail();
+        }
     }
 }

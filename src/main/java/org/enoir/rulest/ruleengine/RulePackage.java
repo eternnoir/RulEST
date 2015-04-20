@@ -1,5 +1,7 @@
 package org.enoir.rulest.ruleengine;
 
+import com.google.gson.JsonArray;
+import org.enoir.rulest.model.Fact;
 import org.enoir.rulest.ruleengine.drools.Resource;
 
 import java.util.List;
@@ -12,4 +14,5 @@ public abstract class RulePackage {
     abstract public String getName();
     abstract public void  onCreate(RulePackageManager rpm);
     abstract public List<Resource> getResources();
+    abstract public List<Fact> parseJsonToFact(JsonArray jsonFacts);
 }
