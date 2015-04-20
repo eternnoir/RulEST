@@ -1,2 +1,2 @@
 # RulEST
-A drools rule engine restful api.
+A drools rule engine RESTful Web Services.
