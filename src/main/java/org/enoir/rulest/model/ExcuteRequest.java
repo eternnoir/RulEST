@@ -1,6 +1,7 @@
 package org.enoir.rulest.model;
 
 import com.google.gson.annotations.SerializedName;
+import org.enoir.rulest.ruleengine.RulePackage;
 
 import java.util.List;
 
@@ -8,7 +9,7 @@ import java.util.List;
  * Created by frank on 2015/4/1.
  */
 public class ExcuteRequest extends RulESTBaseModel{
-    private String targetRulePackage;
+    private RulePackage targetRulePackage;
     private List<Fact> Facts;
 
     public List<Fact> getFacts() {
@@ -19,11 +20,11 @@ public class ExcuteRequest extends RulESTBaseModel{
         Facts = facts;
     }
 
-    public String getTargetRulePackage() {
+    public RulePackage getTargetRulePackage() {
         return targetRulePackage;
     }
 
-    public void setTargetRulePackage(String targetRulePackage) {
+    public void setTargetRulePackage(RulePackage targetRulePackage) {
         this.targetRulePackage = targetRulePackage;
     }
 }
