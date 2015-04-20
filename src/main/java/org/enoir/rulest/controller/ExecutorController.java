@@ -1,6 +1,5 @@
 package org.enoir.rulest.controller;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -9,9 +8,9 @@ import org.enoir.rulest.model.ErrorMsg;
 import org.enoir.rulest.model.ExcuteRequest;
 import org.enoir.rulest.model.Fact;
 import org.enoir.rulest.model.RulESTBaseModel;
+import org.enoir.rulest.ruleengine.Exception.ParseJsonException;
 import org.enoir.rulest.ruleengine.Exception.RulePackageNotFoundException;
 import org.enoir.rulest.ruleengine.RulePackageManager;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,29 +25,40 @@ import java.util.List;
 @RestController
 public class ExecutorController {
 
-    @RequestMapping(value = "/execute",method = RequestMethod.POST)
+    @RequestMapping(value = "/execute", method = RequestMethod.POST)
     public RulESTBaseModel execute(HttpServletRequest request) {
         String jsonString = "";
         ExcuteRequest excuteRequest = null;
         try {
             jsonString = IOUtils.toString(request.getInputStream());
-            if(jsonString.isEmpty()){
+            if (jsonString.isEmpty()) {
                 throw new Exception("Json String is empty");
             }
             excuteRequest = convertJsonToExecuteRequest(jsonString);
         } catch (IOException e) {
             e.printStackTrace();
-            return new ErrorMsg("00","Parse json error");
-        }catch (Exception ex){
+            return new ErrorMsg("00", "Parse json error");
+        } catch (ParseJsonException pje) {
+            pje.printStackTrace();
+            return new ErrorMsg(pje.getErrorCode(), pje.getMessage());
+        } catch (Exception ex) {
             ex.printStackTrace();
             return new ErrorMsg("00", ex.getMessage());
         }
         return excuteRequest;
     }
 
-    private ExcuteRequest convertJsonToExecuteRequest(String jsonString) throws RulePackageNotFoundException {
+    /**
+     * This method will convert request json to Execute Request. It will call rule package's parse method
+     * to convert json Fact to fact object.
+     *
+     * @param jsonString Json String from request.
+     * @return An execute request.
+     * @throws RulePackageNotFoundException
+     */
+    private ExcuteRequest convertJsonToExecuteRequest(String jsonString) throws RulePackageNotFoundException, ParseJsonException {
         JsonParser parser = new JsonParser();
-        JsonObject jsonObj = (JsonObject)parser.parse(jsonString);
+        JsonObject jsonObj = (JsonObject) parser.parse(jsonString);
         String targetPackage = jsonObj.get("targetRulePackage").getAsString();
         JsonArray jsonFacts = jsonObj.getAsJsonArray("Facts");
         List<Fact> facts = RulePackageManager.getInstance().getRulePackage(targetPackage).parseJsonToFact(jsonFacts);

@@ -8,6 +8,6 @@ import org.enoir.rulest.model.Rule;
 public class RulePackageNotFoundException extends BaseException {
     private String rulePackageName;
     public RulePackageNotFoundException(String rulePackageName,String message){
-        super(message);
+        super("01",message);
     }
 }
