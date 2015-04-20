@@ -11,6 +11,8 @@ import org.enoir.rulest.model.RulESTBaseModel;
 import org.enoir.rulest.ruleengine.Exception.ParseJsonException;
 import org.enoir.rulest.ruleengine.Exception.RulePackageNotFoundException;
 import org.enoir.rulest.ruleengine.RulePackageManager;
+import org.enoir.rulest.ruleengine.drools.KnowledgeManager;
+import org.enoir.rulest.ruleengine.drools.Resource;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,7 +28,7 @@ import java.util.List;
 public class ExecutorController {
 
     @RequestMapping(value = "/execute", method = RequestMethod.POST)
-    public RulESTBaseModel execute(HttpServletRequest request) {
+    public Object execute(HttpServletRequest request) {
         String jsonString = "";
         ExcuteRequest excuteRequest = null;
         try {
@@ -45,7 +47,26 @@ public class ExecutorController {
             ex.printStackTrace();
             return new ErrorMsg("00", ex.getMessage());
         }
-        return excuteRequest;
+        return fireRule(excuteRequest);
+    }
+
+    /**
+     * Fire Execute Request's rules . Return all working memory facts.
+     * @param er Execute Request want to fire
+     * @return All working memory facts after fire rule.
+     */
+    private Object fireRule(ExcuteRequest er){
+        KnowledgeManager km = new KnowledgeManager();
+        for(Resource r : er.getTargetRulePackage().getResources()){
+            km.addResource(r);
+        }
+        km.initSession();
+        for(Fact f : er.getFacts()){
+            km.getSession().insert(f);
+        }
+        km.fireAll();
+
+        return km.getSession().getObjects();
     }
 
     /**
@@ -64,7 +85,7 @@ public class ExecutorController {
         List<Fact> facts = RulePackageManager.getInstance().getRulePackage(targetPackage).parseJsonToFact(jsonFacts);
         ExcuteRequest er = new ExcuteRequest();
         er.setFacts(facts);
-        er.setTargetRulePackage(targetPackage);
+        er.setTargetRulePackage(RulePackageManager.getInstance().getRulePackage(targetPackage));
         return er;
     }
 }
