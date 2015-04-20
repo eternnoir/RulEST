@@ -50,7 +50,7 @@ end
 ```
 
 ***POST*** Josn to http://127.0.0.1:8080/execute
-```
+```json
 {
    "targetRulePackage":"SampleRP",
    "Facts":[
@@ -64,7 +64,7 @@ end
 ```
 
 Server will return
-```
+```json
 [
    {
       "id":1,
@@ -84,7 +84,7 @@ Goodbye world
 ```
 
 Multiple facts:
-```
+```json
 {
    "targetRulePackage":"SampleRP",
    "Facts":[
@@ -108,7 +108,7 @@ Multiple facts:
 ```
 
 Result:
-```
+```json
 [
    {
       "id":2,
