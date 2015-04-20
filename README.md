@@ -1,5 +1,5 @@
 # RulEST
-A drools rule engine RESTful Web Services.The purpose is let user can use drools rule engine by resuful api.
+A drools rule engine RESTful Web Services.The purpose is let user can use drools rule engine by resuful web service.
 
 ## Requirement
 * Java JDK 1.7
