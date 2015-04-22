@@ -140,6 +140,7 @@ Goodbye world
 
 ## TODO
 
-* Pluginable RulePackage
+* Pluginable RulePackage.
+* Support Drools stream mode.
  
 
